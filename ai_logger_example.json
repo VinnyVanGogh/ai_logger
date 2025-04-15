@@ -1,0 +1,89 @@
+{
+  "2025-04-15T13:10:49.548865": {
+    "event_id": "b420109b-81e7-4a72-b79e-9fb262284f21",
+    "timestamp": "2025-04-15 13:10:49.548865",
+    "event_type": "data_processing_started",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 23,
+    "function_name": "process_data",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T13:10:50.054219": {
+    "event_id": "8c94a0c1-30fa-42a1-ac25-bc69268993d8",
+    "timestamp": "2025-04-15 13:10:50.054219",
+    "event_type": "data_processing_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 39,
+    "function_name": "process_data",
+    "details": {
+      "details": {
+        "processed_items": 100,
+        "success_rate": 0.9865176458341373,
+        "processing_time_ms": 417
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T13:11:25.878901": {
+    "event_id": "598b3366-c5a6-4bfb-a744-7fbd39a9f6c8",
+    "timestamp": "2025-04-15 13:11:25.878901",
+    "event_type": "data_processing_started",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 23,
+    "function_name": "process_data",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T13:11:26.384380": {
+    "event_id": "3ff77dd8-5b6c-411a-937a-fc65f6d4f470",
+    "timestamp": "2025-04-15 13:11:26.384380",
+    "event_type": "data_processing_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 39,
+    "function_name": "process_data",
+    "details": {
+      "details": {
+        "processed_items": 100,
+        "success_rate": 0.9703131483721312,
+        "processing_time_ms": 163
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T13:19:31.833097": {
+    "event_id": "950fd423-4cb2-4c93-bb48-d74a2f179b33",
+    "timestamp": "2025-04-15 13:19:31.833097",
+    "event_type": "complex_calculation",
+    "component": "model",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 82,
+    "function_name": "complex_calculation",
+    "details": {
+      "details": {
+        "x": 1.8933253216199695,
+        "y": 1.57188516771745,
+        "operation": "modulo"
+      },
+      "app_name": "ai_logger_example"
+    },
+    "model_name": "calculator_model",
+    "input_tokens": null,
+    "output_tokens": null,
+    "latency_ms": null
+  }
+}

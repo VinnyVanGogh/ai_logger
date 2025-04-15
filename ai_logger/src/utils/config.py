@@ -13,7 +13,7 @@ def load_config() -> AppConfig:
     """Load and validate configuration from config file."""
     # agentic_flow_config.json
     # Avoid circular import
-    from uiux import ui
+    from ai_logger.src.user_interface.uiux import ui
     
     config_path = Path(__file__).parent / "ai_logger.json"
 
@@ -74,7 +74,7 @@ def get_spinner_type() -> str:
     return CONFIG.ui.spinner_type
 
 def load_env_from_json(file_path):
-    from .uiux import ui
+    from ..user_interface.uiux import ui
     try:
         with open(file_path, "r") as f:
             env_config = json.load(f)

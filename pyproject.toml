@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "ai-logger"
+version = "0.1.0"
+description = "A module to add logging in json format that an AI could easily understand."
+authors = ["VinnyVanGogh <133192356+VinnyVanGogh@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+# Use correct package path for the new structure
+packages = [{include = "ai_logger"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+rich = "^14.0.0"
+pydantic = "^2.11.3"
+python-dotenv = "^1.1.0"
+pyperclip = "^1.9.0"
+click = "^8.1.7"
+
+# Script entry points
+[tool.poetry.scripts]
+logging-examples = "ai_logger.src.example:cli"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

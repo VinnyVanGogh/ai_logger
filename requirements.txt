@@ -1,0 +1,12 @@
+annotated-types==0.7.0
+click==8.1.8
+markdown-it-py==3.0.0
+mdurl==0.1.2
+pydantic==2.11.3
+pydantic_core==2.33.1
+Pygments==2.19.1
+pyperclip==1.9.0
+python-dotenv==1.1.0
+rich==14.0.0
+typing-inspection==0.4.0
+typing_extensions==4.13.2

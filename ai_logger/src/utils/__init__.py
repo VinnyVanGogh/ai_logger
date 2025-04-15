@@ -17,7 +17,6 @@ from .models import (
     ErrorEvent
 )
 from .config import CONFIG
-from .uiux import ui
 
 __all__ = [
     "AILogger",
@@ -39,5 +38,4 @@ __all__ = [
     "DataEvent",
     "ErrorEvent",
     "CONFIG",
-    "ui"
 ]
