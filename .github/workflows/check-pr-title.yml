@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 name: Check Pull Request Title
+=======
+name: Check Pull Request Title 
+>>>>>>> 935a15e3b3fd55e56584863e78e8b603c151fcc0
 
 on:
   pull_request:
@@ -21,4 +25,8 @@ jobs:
 
             if (!(isFeature || isFix || isChore)) {
               throw new Error('Invalid PR title. Use "Add feature: [Feature Name]", "Fix: [Bug Description]", or "Chore: [Description]".');
+<<<<<<< HEAD
             }
+=======
+            }
+>>>>>>> 935a15e3b3fd55e56584863e78e8b603c151fcc0

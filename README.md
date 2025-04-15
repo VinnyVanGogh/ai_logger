@@ -38,6 +38,54 @@ poetry run run-example run-class --initial 10 --operations 8
 poetry run run-example run-module
 ```
 
+## Configuration
+
+AI Logger can be configured through several methods:
+
+### Using a Configuration File
+
+Create a JSON configuration file like:
+
+```json
+{
+  "verbose": true,
+  "database": {
+    "use_db": true,
+    "dbname": "my_logger_db",
+    "user": "postgres",
+    "password": "secretpassword",
+    "host": "localhost",
+    "port": "5432",
+    "table_name": "ai_logs"
+  },
+  "logging": {
+    "level": "INFO",
+    "log_to_file": true,
+    "log_dir": "logs",
+    "log_to_console": true
+  }
+}
+```
+
+You can specify your custom configuration file in several ways:
+
+1. **Environment variable**:
+   ```bash
+   export AI_LOGGER_CONFIG=/path/to/your/config.json
+   ```
+
+2. **Programmatic loading**:
+   ```python
+   from ai_logger import reload_config
+   reload_config("/path/to/your/config.json")
+   ```
+
+3. **When initializing**:
+   ```python
+   from ai_logger import init_ai_logger
+   init_ai_logger(app_name="my_app", config_path="/path/to/your/config.json")
+   ```
+
 ## Basic Code Usage
 
 ### Direct Import and Usage
@@ -54,7 +102,10 @@ logger = init_ai_logger(
     console_output=True,
     log_level=logging.INFO,  # Optional, defaults to WARNING
     capture_loggers=["sqlalchemy", "uvicorn", "custom_logger_name"],  # Optional, capture other loggers
-    capture_all_loggers=False  # Optional, capture all Python loggers
+    capture_all_loggers=False,  # Optional, capture all Python loggers
+    use_db=True,  # Optional, enable database logging
+    db_name="my_logger_db",  # Optional, custom database name
+    db_table="my_app_logs"  # Optional, custom table name (defaults to app_name)
 )
 
 # Log a model event
@@ -93,7 +144,10 @@ from ai_logger import AILogger
 custom_logger = AILogger(
     app_name="custom_app",
     log_file="custom_logs.json",
-    console_output=True
+    console_output=True,
+    use_db=True,
+    db_name="custom_logger_db",
+    db_table="custom_logs"
 )
 
 # Log a data event
