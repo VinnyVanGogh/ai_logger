@@ -14,7 +14,6 @@ import psycopg2
 from psycopg2.extras import Json
 from datetime import datetime
 import json as json_module  # Rename to avoid conflict
-from pathlib import Path
 from .models import AIEvent, ModelEvent, DataEvent, ErrorEvent
 from .config import USE_DB, get_db_config
 
