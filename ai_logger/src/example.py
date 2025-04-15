@@ -6,8 +6,10 @@ import logging
 from pathlib import Path
 
 from ai_logger.src.utils.ai_logger import AILogger
+
 cwd = Path.cwd()
 log_file = os.path.join(cwd, "ai_logger_example.json")
+
 logger = AILogger(
     app_name="ai_logger_example",
     log_file=log_file,
