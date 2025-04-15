@@ -1,4 +1,4 @@
-name: Check Pull Request Title and Mandatory Checkboxes ☑
+name: Check Pull Request Title
 
 on:
   pull_request:
@@ -21,16 +21,4 @@ jobs:
 
             if (!(isFeature || isFix || isChore)) {
               throw new Error('Invalid PR title. Use "Add feature: [Feature Name]", "Fix: [Bug Description]", or "Chore: [Description]".');
-            }
-
-            if (isFeature || isFix) {
-              const mandatoryChecks = [
-                '- [x] i have read the [contributing.md]',
-                '- [x] i have performed at least one form of testing',
-                '- [x] i have updated the documentation if necessary'
-              ];
-              const missingChecks = mandatoryChecks.filter(check => !prBody.includes(check));
-              if (missingChecks.length > 0) {
-                throw new Error('Mandatory checkboxes are missing or unchecked. Please ensure all mandatory checks are completed.');
-              }
             }

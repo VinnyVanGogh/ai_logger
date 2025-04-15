@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ai-logger"
-version = "0.1.1"
+version = "0.1.2"
 description = "A module to add logging in json format that an AI could easily understand."
 authors = ["VinnyVanGogh <133192356+VinnyVanGogh@users.noreply.github.com>"]
 license = "MIT"

@@ -13,6 +13,7 @@ eggs/
 *.egg-info/
 .installed.cfg
 *.egg
+ai_logger_example.json
 # Environments
 *.env
 *.env
