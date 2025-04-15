@@ -221,7 +221,7 @@ class AILogger:
                     result = func(*args, **kwargs)
                     
                     # Calculate duration
-                    duration_ms = (time.time() - start_time) * 1000
+                    (time.time() - start_time) * 1000
                     
                     # Return result without logging success if below ERROR level
                     return result
