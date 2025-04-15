@@ -8,30 +8,29 @@ jobs:
   check_pr_title_and_checkboxes:
     runs-on: ubuntu-latest
     steps:
-    - name: Check if PR title follows guidelines
-      uses: actions/github-script@v6
-      with:
-        script: |
-          const prTitle = context.payload.pull_request.title.toLowerCase();
-          const prBody = context.payload.pull_request.body.toLowerCase();
+      - name: Validate PR Title and Mandatory Checkboxes (if Feature/Fix)
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const prTitle = context.payload.pull_request.title.toLowerCase();
+            const prBody = (context.payload.pull_request.body || "").toLowerCase();
 
-          // Check the title format
-          const validFeature = prTitle.startsWith("add feature: ");
-          const validFix = prTitle.startsWith("fix: ");
+            const isFeature = prTitle.startsWith("add feature: ");
+            const isFix = prTitle.startsWith("fix: ");
+            const isChore = prTitle.startsWith("chore: ");
 
-          if (!validFeature && !validFix) {
-            throw new Error(`Invalid PR title. Please use the format "Add feature: [Feature Name]" or "Fix: [Bug Description]".`);
-          }
+            if (!(isFeature || isFix || isChore)) {
+              throw new Error('Invalid PR title. Use "Add feature: [Feature Name]", "Fix: [Bug Description]", or "Chore: [Description]".');
+            }
 
-          // Check mandatory checkboxes
-          const mandatoryChecks = [
-            '- [x] i have read the [contributing.md]',
-            '- [x] i have performed at least one form of testing',
-            '- [x] i have updated the documentation if necessary'
-          ];
-
-          const missingChecks = mandatoryChecks.filter(check => !prBody.includes(check));
-          if (missingChecks.length > 0) {
-            throw new Error(`Mandatory checkboxes are missing or unchecked. Please ensure all mandatory checks are completed.`);
-          }
-
+            if (isFeature || isFix) {
+              const mandatoryChecks = [
+                '- [x] i have read the [contributing.md]',
+                '- [x] i have performed at least one form of testing',
+                '- [x] i have updated the documentation if necessary'
+              ];
+              const missingChecks = mandatoryChecks.filter(check => !prBody.includes(check));
+              if (missingChecks.length > 0) {
+                throw new Error('Mandatory checkboxes are missing or unchecked. Please ensure all mandatory checks are completed.');
+              }
+            }
