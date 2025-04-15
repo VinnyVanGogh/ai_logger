@@ -13,7 +13,10 @@ A Python module for structured logging in a format that's easily parsable by AI 
 ## Installation
 
 ```bash
-# Install using Poetry
+# Install from PyPI
+pip install ai-logger
+
+# Or install from source using Poetry
 poetry install
 ```
 
@@ -37,14 +40,21 @@ poetry run run-example run-module
 
 ## Basic Code Usage
 
-```python
-from ai_logger.src.utils.ai_logger import AILogger
+### Direct Import and Usage
 
-# Initialize logger
-logger = AILogger(
+```python
+# Import directly from the package
+import logging
+from ai_logger import init_ai_logger, auto_wrap, auto_wrap_class
+
+# Initialize the global logger
+logger = init_ai_logger(
     app_name="my_app",
     log_file="ai_logs.json",
-    console_output=True
+    console_output=True,
+    log_level=logging.INFO,  # Optional, defaults to WARNING
+    capture_loggers=["sqlalchemy", "uvicorn", "custom_logger_name"],  # Optional, capture other loggers
+    capture_all_loggers=False  # Optional, capture all Python loggers
 )
 
 # Log a model event
@@ -56,14 +66,65 @@ logger.log_model_event(
     latency_ms=500
 )
 
-# Wrap a function with logging
-@logger.wrap_function(component="data_processor")
+# Use the auto_wrap decorator for functions
+@auto_wrap(component="data_processor")
 def process_data(data):
     # Function code here
     return result
 
-# Wrap an entire class
-@logger.wrap_class(component="ml_model")
+# Use the auto_wrap_class decorator for classes
+@auto_wrap_class(component="ml_model")
+class MyModel:
+    def predict(self, inputs):
+        # All methods are automatically wrapped
+        return prediction
+    
+    def train(self, dataset):
+        # Training is also logged
+        return training_results
+```
+
+### Advanced Usage with Manual Logger
+
+```python
+from ai_logger import AILogger
+
+# Create a logger instance manually
+custom_logger = AILogger(
+    app_name="custom_app",
+    log_file="custom_logs.json",
+    console_output=True
+)
+
+# Log a data event
+custom_logger.log_data_event(
+    data_source="database",
+    event_type="query",
+    record_count=1250,
+    details={"query_time_ms": 45, "table": "users"}
+)
+
+# Log an error event
+try:
+    # Some code that might fail
+    result = 1 / 0
+except Exception as e:
+    custom_logger.log_error(
+        error_type="ZeroDivisionError",
+        error_message=str(e),
+        component="math_operations",
+        include_traceback=True,
+        severity="ERROR"
+    )
+
+# Wrap a function with this specific logger
+@custom_logger.wrap_function(component="data_processor")
+def process_data(data):
+    # Function code here
+    return result
+
+# Wrap an entire class with this specific logger
+@custom_logger.wrap_class(component="ml_model")
 class MyModel:
     def predict(self, inputs):
         # Method code here
