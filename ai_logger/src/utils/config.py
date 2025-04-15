@@ -4,7 +4,6 @@ from pathlib import Path
 from typing import Dict
 from pydantic import ValidationError
 import json
-import sys
 import logging
 from .models import AppConfig
 
