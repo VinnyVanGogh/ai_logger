@@ -1,4 +1,3 @@
-from typing import Optional
 import os
 import time
 import random
@@ -127,7 +126,6 @@ def module_example():
 @click.group()
 def cli():
     """AI Logger example application with Click CLI."""
-    pass
 
 @cli.command()
 @click.option("--size", default=100, help="Size of data to process")
