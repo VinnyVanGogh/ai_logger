@@ -20,7 +20,19 @@ logger = AILogger(
 # Example standalone function that will be wrapped
 @logger.wrap_function(component="example_module")
 def process_data(data_size: int = 100) -> dict:
-    """Process a simulated dataset and return statistics."""
+    """process_data
+
+    Description: Processes a simulated dataset and returns statistics.
+
+    Args:
+        data_size (int, optional): Size of the dataset to process. (default: 100).
+
+    Raises:
+        ValueError: A value error if the dataset size is less than 100.
+
+    Returns:
+        dict: A dictionary containing the processed statistics.
+    """
     logger.log_data_event(
         data_source="example_source",
         event_type="data_processing_started",

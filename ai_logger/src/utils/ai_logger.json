@@ -1,8 +1,7 @@
 {
   "verbose": true,
-  "use_db": false,
-  "use_index_file_with_db": false,
   "database": {
+    "use_db": true,
     "dbname": "ai_logger_db",
     "user": "postgres",
     "password": "",
@@ -10,47 +9,10 @@
     "port": "5432",
     "table_name": "ai_logs"
   },
-  "model": {
-    "name": "ai-logger-model",
-    "temperature": 0.1
-  },
-  "ui": {
-    "theme": "dark",
-    "loading_animation": true,
-    "spinner_type": "dots"
-  },
-  "file_processing": {
-    "max_file_size_mb": 10,
-    "skip_binary_files": true
-  },
-  "paths": {
-    "index_dir": ".ai_logger",
-    "index_filename": "ai_logger.json"
-  },
   "logging": {
     "level": "INFO",
     "log_to_file": true,
     "log_dir": "logs",
     "log_to_console": true
-  },
-  "osrs_scraper": {
-    "base_url": "https://secure.runescape.com/m=itemdb_oldschool/top100",
-    "list_types": {
-      "most_traded": 0,
-      "price_rises": 2,
-      "price_falls": 3
-    },
-    "time_scales": {
-      "last_7_days": 0,
-      "last_30_days": 1,
-      "last_90_days": 2,
-      "last_180_days": 3
-    },
-    "results_dir": "results",
-    "sleep_time": 1.0,
-    "timeout": 30000,
-    "max_retries": 3,
-    "concurrent_requests": 3,
-    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
   }
 }

@@ -10,7 +10,20 @@ import time
 import re
 import pkgutil
 import importlib
+import psycopg2
+from psycopg2.extras import Json
+from datetime import datetime
+import json as json_module  # Rename to avoid conflict
+from pathlib import Path
 from .models import AIEvent, ModelEvent, DataEvent, ErrorEvent
+from .config import USE_DB, get_db_config
+
+# Custom JSON encoder for datetime objects
+class DateTimeEncoder(json_module.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        return super().default(obj)
 
 # Pydantic models for our logging structure
 
@@ -22,7 +35,10 @@ class AILogger:
                 log_file: Optional[str] = None,
                 console_output: bool = True,
                 log_level: int = logging.WARNING,  # Default to WARNING
-                excluded_patterns: Optional[List[str]] = None):
+                excluded_patterns: Optional[List[str]] = None,
+                use_db: bool = None,
+                db_name: Optional[str] = None,
+                db_table: Optional[str] = None):
         """
         Initialize the AI Logger
         
@@ -32,12 +48,28 @@ class AILogger:
             console_output: Whether to output to console
             log_level: Logging level (default: WARNING)
             excluded_patterns: List of regex patterns for functions/classes to exclude
+            use_db: Whether to store logs in database (overrides config)
+            db_name: Custom database name (defaults to config)
+            db_table: Custom table name for database logging (defaults to app_name)
         """
         self.app_name = app_name
         self.log_level = log_level
         self.excluded_patterns = excluded_patterns or []
         self._compiled_patterns = [re.compile(pattern) for pattern in self.excluded_patterns]
         self.log_file_path = log_file
+        
+        # Database configuration
+        self.use_db = use_db if use_db is not None else USE_DB
+        self.db_config = get_db_config() if self.use_db else None
+        
+        # Set custom database name if provided
+        if db_name and self.db_config:
+            self.db_config['dbname'] = db_name
+            
+        self.db_table = db_table or app_name.lower().replace(' ', '_')
+        
+        if self.use_db:
+            self._init_database()
         
         # Event accumulator - dictionary with timestamps as keys
         self.events = {}
@@ -97,7 +129,124 @@ class AILogger:
             "line_number": line_number,
             "function_name": function_name
         }
+        
+    def _create_db_if_not_exists(self):
+        """Create database if it doesn't exist"""
+        try:
+            # Connect to default postgres database to check if our database exists
+            conn = psycopg2.connect(
+                dbname="postgres",
+                user=self.db_config['user'],
+                password=self.db_config['password'],
+                host=self.db_config['host'],
+                port=self.db_config['port']
+            )
+            conn.autocommit = True  # Enable autocommit for database creation
+            cursor = conn.cursor()
             
+            # Check if database exists
+            cursor.execute("SELECT 1 FROM pg_database WHERE datname=%s", (self.db_config['dbname'],))
+            db_exists = cursor.fetchone()
+            
+            if not db_exists:
+                # Database doesn't exist, create it
+                cursor.execute(f"CREATE DATABASE {self.db_config['dbname']}")
+                print(f"Database '{self.db_config['dbname']}' created successfully")
+            else:
+                print(f"Database '{self.db_config['dbname']}' already exists")
+                
+            # Close connection to postgres database
+            cursor.close()
+            conn.close()
+            
+        except Exception as e:
+            print(f"Error checking/creating database: {e}")
+            self.use_db = False
+            
+    def _init_database(self):
+        """Initialize database connection and create table if needed"""
+        if not self.use_db:
+            return
+            
+        try:
+            # First ensure database exists
+            self._create_db_if_not_exists()
+            
+            # Connect to our database
+            self.conn = psycopg2.connect(
+                dbname=self.db_config['dbname'],
+                user=self.db_config['user'],
+                password=self.db_config['password'],
+                host=self.db_config['host'],
+                port=self.db_config['port']
+            )
+            self.cursor = self.conn.cursor()
+            
+            # Create table if it doesn't exist - PostgreSQL syntax
+            self.cursor.execute(f'''
+            CREATE TABLE IF NOT EXISTS {self.db_table} (
+                event_id TEXT PRIMARY KEY,
+                timestamp TIMESTAMP,
+                event_type TEXT,
+                component TEXT,
+                file_name TEXT,
+                line_number INTEGER,
+                function_name TEXT,
+                event_json JSONB
+            )
+            ''')
+            
+            # Create indexes for common query fields
+            self.cursor.execute(f"CREATE INDEX IF NOT EXISTS idx_{self.db_table}_timestamp ON {self.db_table}(timestamp)")
+            self.cursor.execute(f"CREATE INDEX IF NOT EXISTS idx_{self.db_table}_event_type ON {self.db_table}(event_type)")
+            self.cursor.execute(f"CREATE INDEX IF NOT EXISTS idx_{self.db_table}_component ON {self.db_table}(component)")
+            self.conn.commit()
+            print(f"Database initialized with table: {self.db_table}")
+        except Exception as e:
+            print(f"Error initializing database: {e}")
+            self.use_db = False
+    
+    def _log_to_database(self, event_dict):
+        """Log event to database"""
+        if not self.use_db:
+            return
+            
+        try:
+            # Prepare values for INSERT
+            event_id = event_dict["event_id"]
+            timestamp = event_dict["timestamp"].isoformat() if isinstance(event_dict["timestamp"], datetime) else event_dict["timestamp"]
+            event_type = event_dict["event_type"]
+            component = event_dict["component"]
+            file_name = event_dict["file_name"]
+            line_number = event_dict["line_number"]
+            function_name = event_dict["function_name"]
+            # First convert datetime objects to strings using our custom encoder
+            serialized_dict = json_module.loads(json_module.dumps(event_dict, cls=DateTimeEncoder))
+            
+            # Use psycopg2's Json adapter for proper JSONB handling
+            event_json = Json(serialized_dict)
+            
+            # Insert into database (PostgreSQL uses %s for parameters)
+            self.cursor.execute(
+                f"""
+                INSERT INTO {self.db_table} 
+                (event_id, timestamp, event_type, component, file_name, line_number, function_name, event_json)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                ON CONFLICT (event_id) DO UPDATE SET 
+                    timestamp = EXCLUDED.timestamp,
+                    event_type = EXCLUDED.event_type,
+                    component = EXCLUDED.component,
+                    file_name = EXCLUDED.file_name,
+                    line_number = EXCLUDED.line_number,
+                    function_name = EXCLUDED.function_name,
+                    event_json = EXCLUDED.event_json
+                """,
+                (event_id, timestamp, event_type, component, file_name, line_number, function_name, event_json)
+            )
+            self.conn.commit()
+        except Exception as e:
+            print(f"Error logging to database: {e}")
+    
     def _log_event(self, event: AIEvent):
         """
         Add event to the event dictionary and update log file
@@ -125,7 +274,11 @@ class AILogger:
         if self.log_file_path:
             # Write the entire events dictionary to the file with indentation
             with open(self.log_file_path, 'w') as f:
-                json.dump(self.events, f, indent=2, default=str)
+                json_module.dump(self.events, f, indent=2, cls=DateTimeEncoder)
+                
+        # Log to database if enabled
+        if self.use_db:
+            self._log_to_database(event_dict)
         
     def log_model_event(self, model_name: str, event_type: str, 
                         input_tokens: Optional[int] = None,
@@ -296,6 +449,15 @@ class AILogger:
                 except (ImportError, AttributeError) as e:
                     print(f"Error wrapping module {module_name}: {e}")
 
+    def __del__(self):
+        """Destructor to close database connection when logger is destroyed"""
+        if hasattr(self, 'conn') and self.conn is not None:
+            try:
+                self.conn.close()
+                print("Database connection closed")
+            except:
+                pass
+    
     def capture_existing_loggers(self, logger_names=None, capture_all=False, min_level=None):
         """
         Redirect logs from existing loggers to this AI logger
@@ -373,7 +535,7 @@ class AILogger:
                     # Write to file directly without going through logger
                     if self.ai_logger.log_file_path:
                         with open(self.ai_logger.log_file_path, 'w') as f:
-                            json.dump(self.ai_logger.events, f, indent=2, default=str)
+                            json_module.dump(self.ai_logger.events, f, indent=2, cls=DateTimeEncoder)
                             
                 except Exception:
                     self.handleError(record)
