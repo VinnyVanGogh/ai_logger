@@ -1,0 +1,37 @@
+name: Check Pull Request Title and Mandatory Checkboxes ☑
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  check_pr_title_and_checkboxes:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check if PR title follows guidelines
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const prTitle = context.payload.pull_request.title.toLowerCase();
+          const prBody = context.payload.pull_request.body.toLowerCase();
+
+          // Check the title format
+          const validFeature = prTitle.startsWith("add feature: ");
+          const validFix = prTitle.startsWith("fix: ");
+
+          if (!validFeature && !validFix) {
+            throw new Error(`Invalid PR title. Please use the format "Add feature: [Feature Name]" or "Fix: [Bug Description]".`);
+          }
+
+          // Check mandatory checkboxes
+          const mandatoryChecks = [
+            '- [x] i have read the [contributing.md]',
+            '- [x] i have performed at least one form of testing',
+            '- [x] i have updated the documentation if necessary'
+          ];
+
+          const missingChecks = mandatoryChecks.filter(check => !prBody.includes(check));
+          if (missingChecks.length > 0) {
+            throw new Error(`Mandatory checkboxes are missing or unchecked. Please ensure all mandatory checks are completed.`);
+          }
+

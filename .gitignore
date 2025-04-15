@@ -1,0 +1,43 @@
+# Python
+*.py[cod]
+__pycache__/
+*.so
+.Python
+build/
+logs/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+# Environments
+*.env
+*.env
+.env
+.venv
+.venv*/
+env/
+venv/
+ENV/
+# Logs and databases
+*.log
+*.sqlite
+*.db
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+# Documentation builds
+docs/_build/
+docs/site/
+# Local project files
+videos/
+local_settings.py
+
+# Project-specific detected patterns
+__pycache__/
