@@ -3,26 +3,17 @@ from ai_logger.src.user_interface import ui
 from ai_logger.src.utils import (
     # Configuration variables
     CONFIG,
+    reload_config,
+    get_db_config,
     
-    # Unused models
-    OSRSScraperConfig,
-    ItemTradeCount,
-    TradeCountCollection,
-    
-    # Important
+    # Important models
     AppConfig,
     AIEvent,
     ModelEvent,
     DataEvent,
     ErrorEvent,
-    
-    # Sub models of AppConfig (Some can probably be removed)
+    LoggingConfig,
     DatabaseConfig,
-    ModelConfig,
-    UIConfig,
-    FileProcessingConfig,
-    PathsConfig,
-    LoggingConfig,   
     
     # Logger tools
     AILogger,
@@ -34,19 +25,14 @@ from ai_logger.src.utils import (
 __all__ = [
     "ui",
     "CONFIG",
+    "reload_config",
+    "get_db_config",
     "AILogger",
     "init_ai_logger",
     "auto_wrap",
     "auto_wrap_class",
     "DatabaseConfig",
-    "ModelConfig",
-    "UIConfig",
-    "FileProcessingConfig",
-    "PathsConfig",
     "LoggingConfig",
-    "OSRSScraperConfig",
-    "ItemTradeCount",
-    "TradeCountCollection",
     "AppConfig",
     "AIEvent",
     "ModelEvent",

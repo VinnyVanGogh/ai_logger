@@ -85,5 +85,442 @@
     "input_tokens": null,
     "output_tokens": null,
     "latency_ms": null
+  },
+  "2025-04-15T15:07:21.584214": {
+    "event_id": "6c89f56b-55e3-4794-bc53-c0cadcc5112f",
+    "timestamp": "2025-04-15 15:07:21.584214",
+    "event_type": "data_processing_started",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 36,
+    "function_name": "process_data",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:07:22.089153": {
+    "event_id": "dd0de3b0-5abc-4179-b159-cf117918f5d0",
+    "timestamp": "2025-04-15 15:07:22.089153",
+    "event_type": "data_processing_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 52,
+    "function_name": "process_data",
+    "details": {
+      "details": {
+        "processed_items": 100,
+        "success_rate": 0.9382341956437175,
+        "processing_time_ms": 361
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:07:22.091527": {
+    "event_id": "9a595b59-3e94-40b2-a52f-69965be3832d",
+    "timestamp": "2025-04-15 15:07:22.091527",
+    "event_type": "error",
+    "component": "example_module",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/utils/ai_logger.py",
+    "line_number": 231,
+    "function_name": "wrapper",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "error_type": "ValueError",
+    "error_message": "Random error in data processing",
+    "stack_trace": "Traceback (most recent call last):\n  File \"/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/utils/ai_logger.py\", line 221, in wrapper\n    result = func(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py\", line 61, in process_data\n    raise ValueError(\"Random error in data processing\")\nValueError: Random error in data processing\n",
+    "severity": "ERROR"
+  },
+  "2025-04-15T15:07:42.011937": {
+    "event_id": "e25a5367-586a-4db9-85f3-5e544580e16e",
+    "timestamp": "2025-04-15 15:07:42.011937",
+    "event_type": "data_processing_started",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 36,
+    "function_name": "process_data",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:07:42.514217": {
+    "event_id": "bf83f1e5-82f5-4328-b16c-543d256ebec4",
+    "timestamp": "2025-04-15 15:07:42.514217",
+    "event_type": "data_processing_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 52,
+    "function_name": "process_data",
+    "details": {
+      "details": {
+        "processed_items": 100,
+        "success_rate": 0.9505114578359136,
+        "processing_time_ms": 257
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:08:52.760351": {
+    "event_id": "6ab4feb0-9535-4b5d-8881-ee7d3ae0ab70",
+    "timestamp": "2025-04-15 15:08:52.760351",
+    "event_type": "module_test_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 131,
+    "function_name": "module_example",
+    "details": {
+      "details": {
+        "wrapped_function_result": 15
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "module_example",
+    "record_count": null
+  },
+  "2025-04-15T15:12:46.508749": {
+    "event_id": "1d938800-5486-4569-ab8e-c25c11515b5a",
+    "timestamp": "2025-04-15 15:12:46.508749",
+    "event_type": "data_processing_started",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 36,
+    "function_name": "process_data",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:12:47.014404": {
+    "event_id": "0493d1e8-7305-43ae-890f-a4fcb798bed0",
+    "timestamp": "2025-04-15 15:12:47.014404",
+    "event_type": "data_processing_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 52,
+    "function_name": "process_data",
+    "details": {
+      "details": {
+        "processed_items": 100,
+        "success_rate": 0.9766593505575959,
+        "processing_time_ms": 225
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:12:47.016521": {
+    "event_id": "569db1b7-a41f-4e7b-b719-8554bd09c3d8",
+    "timestamp": "2025-04-15 15:12:47.016521",
+    "event_type": "error",
+    "component": "example_module",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/utils/ai_logger.py",
+    "line_number": 234,
+    "function_name": "wrapper",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "error_type": "ValueError",
+    "error_message": "Random error in data processing",
+    "stack_trace": "Traceback (most recent call last):\n  File \"/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/utils/ai_logger.py\", line 224, in wrapper\n    result = func(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py\", line 61, in process_data\n    raise ValueError(\"Random error in data processing\")\nValueError: Random error in data processing\n",
+    "severity": "ERROR"
+  },
+  "2025-04-15T15:12:52.257879": {
+    "event_id": "79dacaa1-4ab4-4622-a991-e068b4225a20",
+    "timestamp": "2025-04-15 15:12:52.257879",
+    "event_type": "data_processing_started",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 36,
+    "function_name": "process_data",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:12:52.762966": {
+    "event_id": "1940a6f3-6d77-4092-a239-71bf334396ca",
+    "timestamp": "2025-04-15 15:12:52.762966",
+    "event_type": "data_processing_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 52,
+    "function_name": "process_data",
+    "details": {
+      "details": {
+        "processed_items": 100,
+        "success_rate": 0.9234830772530824,
+        "processing_time_ms": 437
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:13:16.562986": {
+    "event_id": "b31031cb-4e97-43f7-a3ca-c35feffb2824",
+    "timestamp": "2025-04-15 15:13:16.562986",
+    "event_type": "data_processing_started",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 36,
+    "function_name": "process_data",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:13:17.065629": {
+    "event_id": "bc7f4148-5d7f-4a5c-85f2-2d2298a73732",
+    "timestamp": "2025-04-15 15:13:17.065629",
+    "event_type": "data_processing_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 52,
+    "function_name": "process_data",
+    "details": {
+      "details": {
+        "processed_items": 100,
+        "success_rate": 0.9503474203901704,
+        "processing_time_ms": 445
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:13:33.257965": {
+    "event_id": "20d4b9a4-18b1-46d0-817f-ee085d606ff5",
+    "timestamp": "2025-04-15 15:13:33.257965",
+    "event_type": "data_processing_started",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 36,
+    "function_name": "process_data",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:13:33.758774": {
+    "event_id": "fd709c8c-ee8f-4145-bfb4-881fb69f0757",
+    "timestamp": "2025-04-15 15:13:33.758774",
+    "event_type": "data_processing_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 52,
+    "function_name": "process_data",
+    "details": {
+      "details": {
+        "processed_items": 100,
+        "success_rate": 0.9148281445465188,
+        "processing_time_ms": 316
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 100
+  },
+  "2025-04-15T15:13:45.448569": {
+    "event_id": "9ddf0be8-bf78-4882-907f-023d3a336313",
+    "timestamp": "2025-04-15 15:13:45.448569",
+    "event_type": "module_test_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 131,
+    "function_name": "module_example",
+    "details": {
+      "details": {
+        "wrapped_function_result": 15
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "module_example",
+    "record_count": null
+  },
+  "2025-04-15T15:15:04.476082": {
+    "event_id": "50b42a66-1726-4aee-ba82-3b0ad10b59fd",
+    "timestamp": "2025-04-15 15:15:04.476082",
+    "event_type": "module_test_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 131,
+    "function_name": "module_example",
+    "details": {
+      "details": {
+        "wrapped_function_result": 15
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "module_example",
+    "record_count": null
+  },
+  "2025-04-15T15:17:43.801885": {
+    "event_id": "5202a6f0-f9bf-4b67-8862-3dbce18bdbb6",
+    "timestamp": "2025-04-15 15:17:43.801885",
+    "event_type": "module_test_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 131,
+    "function_name": "module_example",
+    "details": {
+      "details": {
+        "wrapped_function_result": 15
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "module_example",
+    "record_count": null
+  },
+  "2025-04-15T15:21:17.317194": {
+    "event_id": "2703ab6d-f11e-41db-a643-214945f19ab3",
+    "timestamp": "2025-04-15 15:21:17.317194",
+    "event_type": "module_test_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 131,
+    "function_name": "module_example",
+    "details": {
+      "details": {
+        "wrapped_function_result": 15
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "module_example",
+    "record_count": null
+  },
+  "2025-04-15T15:21:39.336183": {
+    "event_id": "c35b562b-b70a-47c5-be87-3f9f80183a36",
+    "timestamp": "2025-04-15 15:21:39.336183",
+    "event_type": "module_test_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 131,
+    "function_name": "module_example",
+    "details": {
+      "details": {
+        "wrapped_function_result": 15
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "module_example",
+    "record_count": null
+  },
+  "2025-04-15T15:35:09.972001": {
+    "event_id": "4b8c93cf-f66c-418a-abc7-2ab49fb43626",
+    "timestamp": "2025-04-15 15:35:09.972001",
+    "event_type": "module_test_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 131,
+    "function_name": "module_example",
+    "details": {
+      "details": {
+        "wrapped_function_result": 15
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "module_example",
+    "record_count": null
+  },
+  "2025-04-15T15:37:35.408233": {
+    "event_id": "5d3027da-9e69-4a33-9f42-77c06954bbb6",
+    "timestamp": "2025-04-15T15:37:35.408233",
+    "event_type": "module_test_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 131,
+    "function_name": "module_example",
+    "details": {
+      "details": {
+        "wrapped_function_result": 15
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "module_example",
+    "record_count": null
+  },
+  "2025-04-15T15:37:46.230929": {
+    "event_id": "588721ae-e235-4d75-b595-2db82561d1e6",
+    "timestamp": "2025-04-15T15:37:46.230929",
+    "event_type": "data_processing_started",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 36,
+    "function_name": "process_data",
+    "details": {
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 150
+  },
+  "2025-04-15T15:37:46.739407": {
+    "event_id": "6e58847a-0396-430c-b43f-a2e13bf8d473",
+    "timestamp": "2025-04-15T15:37:46.739407",
+    "event_type": "data_processing_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 52,
+    "function_name": "process_data",
+    "details": {
+      "details": {
+        "processed_items": 150,
+        "success_rate": 0.9716398331801847,
+        "processing_time_ms": 102
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "example_source",
+    "record_count": 150
+  },
+  "2025-04-15T15:37:46.742922": {
+    "event_id": "41c317eb-c31b-49f8-9e8d-a14dacb2b165",
+    "timestamp": "2025-04-15T15:37:46.742922",
+    "event_type": "complex_calculation",
+    "component": "model",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 95,
+    "function_name": "complex_calculation",
+    "details": {
+      "details": {
+        "x": 2.8842136949240396,
+        "y": 1.5716489323262641,
+        "operation": "power"
+      },
+      "app_name": "ai_logger_example"
+    },
+    "model_name": "calculator_model",
+    "input_tokens": null,
+    "output_tokens": null,
+    "latency_ms": null
+  },
+  "2025-04-15T15:37:46.746318": {
+    "event_id": "b510dda5-ffaf-40ec-a9ea-7ab83aed72be",
+    "timestamp": "2025-04-15T15:37:46.746318",
+    "event_type": "module_test_completed",
+    "component": "data",
+    "file_name": "/Users/vincevasile/Documents/dev/python/active_projects/github/ai_logger/ai_logger/src/example.py",
+    "line_number": 131,
+    "function_name": "module_example",
+    "details": {
+      "details": {
+        "wrapped_function_result": 15
+      },
+      "app_name": "ai_logger_example"
+    },
+    "data_source": "module_example",
+    "record_count": null
   }
 }

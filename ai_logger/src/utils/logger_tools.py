@@ -12,7 +12,11 @@ def init_ai_logger(app_name: str,
                 log_level: int = logging.WARNING,
                 excluded_patterns: Optional[List[str]] = None,
                 capture_loggers: Optional[List[str]] = None,
-                capture_all_loggers: bool = False) -> AILogger:
+                capture_all_loggers: bool = False,
+                use_db: bool = None,
+                db_name: Optional[str] = None,
+                db_table: Optional[str] = None,
+                config_path: Optional[str] = None) -> AILogger:
     """
     Initialize the global AI logger
     
@@ -24,17 +28,31 @@ def init_ai_logger(app_name: str,
         excluded_patterns: List of regex patterns for functions/classes to exclude
         capture_loggers: List of logger names to capture (e.g., ['sqlalchemy', 'uvicorn'])
         capture_all_loggers: If True, capture all loggers (use with caution!)
+        use_db: Whether to store logs in database (defaults to config setting)
+        db_name: Custom database name (defaults to config)
+        db_table: Custom table name for database logging (defaults to app_name)
+        config_path: Path to a custom configuration file
         
     Returns:
         AILogger instance
     """
     global _GLOBAL_LOGGER
+    
+    # If a custom config path is provided, load it
+    if config_path:
+        from .config import reload_config
+        reload_config(config_path)
+    
+    # Initialize the logger
     _GLOBAL_LOGGER = AILogger(
         app_name=app_name,
         log_file=log_file,
         console_output=console_output,
         log_level=log_level,
-        excluded_patterns=excluded_patterns
+        excluded_patterns=excluded_patterns,
+        use_db=use_db,
+        db_name=db_name,
+        db_table=db_table
     )
     
     # Set up global exception handler
